@@ -58,14 +58,6 @@ console.log("Response is incorrect");
   }
 }
 
-// for(let i=0;i<givenAnswers.length;i++){
-//   if(givenAnswers[i]==correctAnswers[i]){
-//     correct++;
-//   }
-//   else{
-// wrong++;
-//   }
-// }
 console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong `)
 
 
