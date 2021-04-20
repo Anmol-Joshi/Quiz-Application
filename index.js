@@ -58,6 +58,6 @@ console.log("Response is incorrect");
   }
 }
 
-console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong `)
+console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong.`)
 
 
