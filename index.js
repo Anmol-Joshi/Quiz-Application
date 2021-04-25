@@ -1,63 +1,81 @@
 const readLineSync=require('readline-sync');
-let name=readLineSync.question('Enter your name:-')
-console.log(`Hello ${name} welcome to the JavaScript quiz,you will be given 4 options and you have to select the right option`)
 
-const questions=[`Q1.Which of the following is true about cookie handling in JavaScript?
-1-JS can manipulate cookies using the cookie property of the Document object 
-2-JS can read,create,modify,and delete the cookie or cookies that apply to the current web page
-3-Both of the above
-4-None of the above
-`,
-`Q2.Which built-in method adds one or more elements to the end of an array and returns the new length of the array?
-1-last()
-2-put()
-3-push()
-4-None of the above
-`,
-`Q3.Which built-in method returns the string representation of the number's value?
-1-toValue()
-2-toNumber()
-3-toString()
-4-None of the above
-`,
-`Q4.Which of the following function of String object returns a number indicating the Unicode value of the character at the given index?
-1-charAt()
-2-charCodeAt()
-3-concat()
-4-indexOf()
-`,
-`Q5.Which of the following function of String object splits a String object into an array of strings by separating the string into substrings?
-1-slice()
-2-split()
-3-replace()
-4-search()
-`
-,
-`Q6.Which of the following function of String object returns the primitive value of the specified object?
-1-toLocaleUpperCase()
-2-toUpperCase()
-3-toString()
-4-valueOf()
-`
-];
-let correct=0;
-let wrong=0;
+const quizData=[
+  {
+    question:'Which of the following is true about cookie handling in JavaScript?',
+    options:['JS can manipulate cookies using the cookie property of the Document object',
+    'JS can read,create,modify,and delete the cookie or cookies that apply to the current web page',
+    'Both of the above',
+    'None of the above']
+    ,
+    correctAnswer:3
 
-const correctAnswers=[3,3,3,2,2,4];
-const givenAnswers=[];
-for(let i=0;i<questions.length;i++){
-  let ele=readLineSync.question(questions[i]);
-  givenAnswers.push(ele);
-  if(givenAnswers[i]==correctAnswers[i]){
-    correct++;
-    console.log("Response is correct");
+  },
+  {
+    question:'Which built-in method returns the string representation of the number\'s value?',
+    options:['toValue()','toNumber()','toString()','None of the above'],
+    correctAnswer:3
   }
-  else{
-wrong++;
-console.log("Response is incorrect");
+ ,
+  {
+    question:'Which of the following function of String object returns a number indicating the Unicode value of the character at the given index?\n',
+    options:['charAt()','charCodeAt()','concat()','indexOf()'],
+    correctAnswer:3
   }
+  ,
+  {
+    question:'Which of the following function of String object splits a String object into an array of strings by separating the string into substrings?',
+    options:['slice()','split()','replace()','search()'],
+    correctAnswer:2
+  }
+  ,
+  {
+    question:'Which built-in method adds one or more elements to the end of an array and returns the new length of the array?\n',
+    options:['last()','put()','push()','None of the above'],
+    correctAnswer:2
+  }
+  ,
+  {
+    question:'Which of the following function of String object returns the primitive value of the specified object?\n',
+    options:['toLocaleUpperCase()','toUpperCase()','toString()','valueOf()'],
+    correctAnswer:4
+  }
+]
+
+const main=()=>{
+  let name=readLineSync.question('Enter your name:-')
+  console.log(`Hello ${name}!\nWelcome to the JavaScript quiz!\nYou will be given n options and you have to select the right option.\n`)
+
+  let correct=0;
+  let wrong=0;
+
+  for(let i=0;i<quizData.length;i++){
+    data=quizData[i];
+    console.log(`Q${i+1}.${data['question']}\n`);
+    options=data['options'];
+    totalOptions=options.length;
+    for(let j=0;j<options.length;j++){
+      console.log(`${j+1} ${options[j]}\n`);
+    }
+    let answer=readLineSync.question(`Enter your choice from 1 to ${totalOptions}:\n`,);
+    correctAnswer=data['correctAnswer'];
+    if(answer==correctAnswer){
+      console.log('\nCorrect Answer!');
+      correct++;
+      console.log(`Current score is:\nCorrect:${correct}\nWrong:${wrong}\n`);
+    }
+    else{
+      console.log('\nWrong Answer!');
+      console.log(`The correct answer is:${options[correctAnswer-1]}`)
+      wrong++;
+      console.log(`Current score is:\nCorrect:${correct}\nWrong:${wrong}\n`);
+    }
+  }
+
+
+  console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong.`)
 }
 
-console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong.`)
+main();
 
 
