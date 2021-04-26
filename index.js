@@ -41,41 +41,76 @@ const quizData=[
     correctAnswer:4
   }
 ]
+const welcomeUser=(name)=>{
+  console.log(`Hello ${name}!\nWelcome to the JavaScript quiz!\nYou will be given n options and you have to select the right option.\n`);
+
+}
+
+const displayQuestion=(i,question)=>{
+    console.log(`Q${i+1}.${question}\n`);
+}
+const displayOptions=(options)=>{
+  let j=1;
+  for(option of options){
+      console.log(`${j}. ${option}\n`);
+      j++;
+  }
+}
+
+const getAnswer=(totalOptions)=>{
+  return readLineSync.question(`Enter your choice from 1 to ${totalOptions}:\n`,);
+}
+
+const checkAnswer=(answer,correctAnswer)=>{
+  if(answer==correctAnswer){
+    return true;
+  }
+  return false;
+}
+
+const displayCorrectAnswer=(options,index)=>{
+  console.log(`The correct answer is:${options[index]}`);
+}
+
+const displayCurrentScore=(correct,wrong)=>{
+  console.log(`Current score is:\nCorrect:${correct}\nWrong:${wrong}\n`);
+}
+
+const displayFinalScore=(name,correct,wrong)=>{
+  console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong.`);
+}
 
 const main=()=>{
-  let name=readLineSync.question('Enter your name:-')
-  console.log(`Hello ${name}!\nWelcome to the JavaScript quiz!\nYou will be given n options and you have to select the right option.\n`)
 
+  let name=readLineSync.question('Enter your name:-');
   let correct=0;
   let wrong=0;
 
+  welcomeUser(name);
+
   for(let i=0;i<quizData.length;i++){
-    data=quizData[i];
-    console.log(`Q${i+1}.${data['question']}\n`);
-    options=data['options'];
+    const {question,options,correctAnswer}=quizData[i];
+
+    displayQuestion(i,question);
+
     totalOptions=options.length;
-    for(let j=0;j<options.length;j++){
-      console.log(`${j+1} ${options[j]}\n`);
-    }
-    let answer=readLineSync.question(`Enter your choice from 1 to ${totalOptions}:\n`,);
-    correctAnswer=data['correctAnswer'];
-    if(answer==correctAnswer){
+
+    displayOptions(options);
+
+    let answer=getAnswer(totalOptions);
+    
+    if(checkAnswer(answer,correctAnswer)){
       console.log('\nCorrect Answer!');
       correct++;
-      console.log(`Current score is:\nCorrect:${correct}\nWrong:${wrong}\n`);
     }
     else{
       console.log('\nWrong Answer!');
-      console.log(`The correct answer is:${options[correctAnswer-1]}`)
+      displayCorrectAnswer(options,correctAnswer-1);
       wrong++;
-      console.log(`Current score is:\nCorrect:${correct}\nWrong:${wrong}\n`);
     }
+    displayCurrentScore(correct,wrong);
   }
 
-
-  console.log(`Hi ${name}, you answered ${correct} questions correct and ${wrong} questions wrong.`)
+  displayFinalScore(name,correct,wrong);
 }
-
 main();
-
-
